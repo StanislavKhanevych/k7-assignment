@@ -1,13 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { AddProjectPopupComponent } from './add-project-popup/add-project-popup.component';
 
 @Component({
   selector: 'app-root',
+  template: `<div class="container">
+    <button class="open-dialog-button" mat-button (click)="openDialog()">
+      Add Project
+    </button>
+  </div> `,
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [MatDialogModule, MatButtonModule],
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'add-project-popup';
+  constructor(private dialog: MatDialog) {}
+
+  openDialog() {
+    this.dialog.open(AddProjectPopupComponent);
+  }
 }

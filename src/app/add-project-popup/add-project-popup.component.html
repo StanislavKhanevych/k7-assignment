@@ -1,0 +1,98 @@
+<div class="container">
+  <mat-card>
+    <div class="header">
+      Add Project
+      <button mat-icon-button (click)="closeDialog()" class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <mat-card-content>
+      <form
+        [formGroup]="projectForm"
+        (ngSubmit)="onAddProject()"
+        class="form-grid"
+      >
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Project Base Catalog Number</mat-label>
+          <input matInput formControlName="projectBaseCatalogNumber" />
+          <mat-error
+            *ngIf="
+              projectForm.get('projectBaseCatalogNumber')?.hasError('required')
+            "
+          >
+            Project Base Catalog Number is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Artist</mat-label>
+          <textarea matInput formControlName="artist"></textarea>
+          <mat-error *ngIf="projectForm.get('artist')?.hasError('required')">
+            Artist is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Project Title</mat-label>
+          <input matInput formControlName="projectTitle" />
+          <mat-error
+            *ngIf="projectForm.get('projectTitle')?.hasError('required')"
+          >
+            Project Title is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Label</mat-label>
+          <mat-select formControlName="label">
+            <mat-option *ngFor="let name of names" [value]="name">{{
+              name
+            }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="projectForm.get('label')?.hasError('required')">
+            Label is required
+          </mat-error>
+        </mat-form-field>
+
+        <div class="album-type-container">
+          <div class="album-type-title">Album Type:</div>
+          <div class="button-group">
+            <button
+              mat-button
+              class="toggle-button"
+              [ngClass]="{
+                active:
+                  projectForm.get('albumType')?.value === 'Original Material'
+              }"
+              type="button"
+              (click)="setAlbumType('Original Material')"
+            >
+              Original Material
+            </button>
+            <button
+              mat-button
+              class="toggle-button"
+              [ngClass]="{
+                active: projectForm.get('albumType')?.value === 'Compilation'
+              }"
+              type="button"
+              (click)="setAlbumType('Compilation')"
+            >
+              Compilation
+            </button>
+          </div>
+        </div>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="submit-button"
+          [disabled]="!projectForm.valid"
+        >
+          Add Project
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -46,8 +46,24 @@ export class AddProjectPopupComponent {
     });
   }
 
+  get projectBaseCatalogNumber() {
+    return this.projectForm.get('projectBaseCatalogNumber');
+  }
+  get artist() {
+    return this.projectForm.get('artist');
+  }
+  get projectTitle() {
+    return this.projectForm.get('projectTitle');
+  }
+  get label() {
+    return this.projectForm.get('label');
+  }
+  get albumType() {
+    return this.projectForm.get('albumType');
+  }
+
   setAlbumType(type: string): void {
-    this.projectForm.get('albumType')?.setValue(type);
+    this.albumType?.setValue(type);
   }
 
   closeDialog(): void {
